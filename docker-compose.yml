@@ -1,0 +1,21 @@
+services:
+  postgres:
+    image: postgres:15
+    container_name: postgres_db
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: train_db
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: 1}6[#TMDF9Wg
+    ports:
+      - "5431:5432"
+    volumes:
+      - pg_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U admin -d train_db"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  pg_data:
